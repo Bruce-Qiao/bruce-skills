@@ -11,7 +11,7 @@
 一键安装全部 skill：
 
 ```bash
-git clone https://github.com/bruce-qiao/bruce-skills.git
+git clone https://github.com/Bruce-Qiao/bruce-skills.git
 cd bruce-skills
 ./install.sh
 ```
