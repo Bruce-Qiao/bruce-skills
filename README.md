@@ -10,6 +10,9 @@
 - **bruce-money** —— 产品 idea 挣钱体检。对话式六步追问，把模糊念头逼成具体填空，再用『购买理由』四要素 + 三个共性 + 供需失衡 + Alpha 窗口 + 红线扫描砸一遍，给红/黄/绿三档结论 + 下一步动作。  
   *本 skill 基于刘小排课程《AI编程》编写*
 
+- **bmp** —— BMP 投资标的体检。按 Business（低份额/大市场/护城河三问）→ Management（所有者思维/懂价值驱动两问）→ Price（earnings power 估值一票否决，≥5% earnings yield）四道关卡对单个公司做联网体检，输出 Back up the truck / Wait and watch / Reject 三档结论并落盘 Obsidian。附 quick 模式（只跑 B+M，快速淘汰）。判 Yes 比判 No 需要更强证据，命中率预期 9/10 不合格。  
+  *本 skill 基于 Adam Seessel《Where the Money Is: Value Investing in the Digital Age》(2022) 编写，方法论细则与四个估值计算模板见 `bmp/references/`（含原书页码）*
+
 ## 安装
 
 一键安装全部 skill：
