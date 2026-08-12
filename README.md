@@ -13,6 +13,9 @@
 - **bmp** —— BMP 投资标的体检。按 Business（低份额/大市场/护城河三问）→ Management（所有者思维/懂价值驱动两问）→ Price（earnings power 估值一票否决，≥5% earnings yield）四道关卡对单个公司做联网体检，输出 Back up the truck / Wait and watch / Reject 三档结论并落盘 Obsidian。附 quick 模式（只跑 B+M，快速淘汰）。判 Yes 比判 No 需要更强证据，命中率预期 9/10 不合格。  
   *本 skill 基于 Adam Seessel《Where the Money Is: Value Investing in the Digital Age》(2022) 编写，方法论细则与四个估值计算模板见 `bmp/references/`（含原书页码）*
 
+- **darwin** —— 达尔文投资体检（Nalanda 流程）。按「先拒绝、后分析」五道关卡对单个公司做联网体检：六大禁区一票否决 → 10 年 ROCE 硬筛（自算口径，持续 >20%）→ 稳健性七要素 + 趋同验证 + 长期市场份额 → 诚实/廉价信号审计 → 往绩 PE 估值（永远最后，≤市场平均），输出 永久持有候选 / 观察名单 / Reject 三档结论并落盘 Obsidian。附 quick 模式（只跑禁区+ROCE）与 hold 模式（按书中仅有的三条卖出理由检视持仓，估值过高永远不是卖出理由）。  
+  *本 skill 基于 Pulak Prasad《What I Learned About Investing from Darwin》(2023，中文版《我从达尔文那里学到的投资知识》) 编写，方法论细则与原则金句见 `darwin/references/methodology.md`*
+
 ## 安装
 
 一键安装全部 skill：
