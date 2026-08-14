@@ -16,6 +16,9 @@
 - **darwin** —— 达尔文投资体检（Nalanda 流程）。按「先拒绝、后分析」五道关卡对单个公司做联网体检：六大禁区一票否决 → 10 年 ROCE 硬筛（自算口径，持续 >20%）→ 稳健性七要素 + 趋同验证 + 长期市场份额 → 诚实/廉价信号审计 → 往绩 PE 估值（永远最后，≤市场平均），输出 永久持有候选 / 观察名单 / Reject 三档结论并落盘 Obsidian。附 quick 模式（只跑禁区+ROCE）与 hold 模式（按书中仅有的三条卖出理由检视持仓，估值过高永远不是卖出理由）。  
   *本 skill 基于 Pulak Prasad《What I Learned About Investing from Darwin》(2023，中文版《我从达尔文那里学到的投资知识》) 编写，方法论细则与原则金句见 `darwin/references/methodology.md`*
 
+- **podcast-transcribe** —— 苹果播客转写。给一个 Apple Podcasts 单集链接，自动经 iTunes Lookup API 解析出音频直链，下载后用本地 whisper.cpp（large-v3-turbo 模型，Metal 加速）转成逐字稿，按段落整理后存入 Obsidian vault，全程本地处理、音频不出本机。1 小时节目约 4 分钟转完。  
+  *依赖：`brew install whisper-cpp jq ffmpeg` + [ggml-large-v3-turbo 模型](https://huggingface.co/ggerganov/whisper.cpp)（约 1.5GB，放 `~/.cache/whisper.cpp/`）。输出目录硬编码为作者的 Obsidian vault，使用前请修改 `SKILL.md` 中的路径*
+
 ## 安装
 
 一键安装全部 skill：

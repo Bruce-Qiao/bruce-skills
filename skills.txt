@@ -2,3 +2,4 @@ clarify
 bruce-money
 bmp
 darwin
+podcast-transcribe
