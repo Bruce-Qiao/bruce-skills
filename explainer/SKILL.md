@@ -35,7 +35,7 @@ Source: Karpathy's tweet https://x.com/karpathy/status/2105819303471976479 . In 
 **options**:
 - `严格` / `strict`: 100% STE (default 80%; see `references/ste.md`)
 - `英文` / `english`: write in English (default: follow the input language)
-- `--ref <wav> --ref-text "原话"`: clone a voice for the video narration; `--instruct "请用稍慢的语速说。"`: narration style
+- Narration voice: **defaults to the user's own voice** (`~/Coding/CosyVoice/my_voice.wav` + the transcript `my_voice.txt` next to it; if either file is missing, CosyVoice's sample voice is used). `内置声音` / `--builtin-voice` = use the sample voice this time; `--ref <wav> --ref-text "原话"` = use another voice this time; `--instruct "请用稍慢的语速说。"` = narration style
 
 **Input**: a topic name → research and explain it yourself; a file path / URL → read it first, then explain what it says. When a fact needs checking, look it up online. Don't make up numbers.
 

@@ -1,14 +1,20 @@
 # Video method: 3b1b-style explainer video (Manim + CosyVoice)
 
-## Toolchain (verified 2026-10-12)
+## Toolchain (verified 2026-10-12; LaTeX added the same day)
 
 | Part | Command / location | Notes |
 |---|---|---|
 | Animation | `uvx --python 3.12 --from manim manim render ...` | Manim CE, no global install; uv caches it, so only the first run downloads |
 | Narration | `~/Coding/CosyVoice/.venv/bin/python <skill>/scripts/tts_batch.py` | Loads the model once (~30 s), RTF ≈ 1.3 |
 | Checks | `ffmpeg` / `ffprobe` | Pull frames, check lengths |
+| Formulas | MacTeX (TeX Live 2026, `/Library/TeX/texbin`) | `MathTex` / `Tex` / axis numbers need it |
 
-**No LaTeX**: `MathTex` / `Tex` will throw errors. Write formulas with `Text` / `MarkupText` and Unicode (`×` `÷` `²` `ⁿ` `√` `≈` `→`). Use `<sup>` in `MarkupText` for superscripts. Don't suggest installing MacTeX (that is a global install).
+**Formulas use LaTeX**:
+- Pure math: `MathTex(r"A = P(1+r)^n")`. Use `TransformMatchingTex` to animate one formula turning into another; that is the most 3b1b-like way to show an equation change.
+- Chinese mixed with a formula: `Tex(r"复利：$P(1+r)^n$", tex_template=TexTemplateLibrary.ctex)` (xelatex + ctex, verified).
+- Axis numbers: `ax.add_coordinates()` or `DecimalNumber` work now.
+- Plain Chinese labels still use `Text(..., font="PingFang SC")`; it renders faster and its font matches the rest of the video.
+- **Always prefix render commands with `PATH="/Library/TeX/texbin:$PATH"`**. A shell started before MacTeX was installed doesn't have TeX on its PATH, and Manim will report that latex can't be found.
 
 **Chinese font**: `Text(..., font="PingFang SC")`. Verified to render correctly.
 
@@ -36,7 +42,8 @@
 ```bash
 ~/Coding/CosyVoice/.venv/bin/python ~/.claude/skills/explainer/scripts/tts_batch.py \
   "$OUT/video/script.json" "$OUT/video/audio"
-# Voice cloning: add --ref my.wav --ref-text "原话"; style: --instruct "请用稍慢的语速说。"
+# Default voice = my_voice.wav + my_voice.txt in the CosyVoice dir (the user's own voice)
+# Other voice: --ref x.wav --ref-text "原话"; sample voice: --builtin-voice; style: --instruct "请用稍慢的语速说。"
 ```
 
 This produces `audio/s1.wav ...` and `audio/durations.json`. Run it in the background (6 scenes ≈ 3–4 minutes) and write `scene.py` meanwhile.
@@ -83,7 +90,7 @@ class Explainer(Scene):
 
 ```bash
 cd "$OUT/video"
-uvx --python 3.12 --from manim manim render -ql --disable_caching --media_dir media scene.py Explainer
+PATH="/Library/TeX/texbin:$PATH" uvx --python 3.12 --from manim manim render -ql --disable_caching --media_dir media scene.py Explainer
 # Output: media/videos/scene/480p15/Explainer.mp4
 ```
 

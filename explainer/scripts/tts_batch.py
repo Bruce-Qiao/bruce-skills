@@ -3,7 +3,10 @@
 
 Run with CosyVoice's own interpreter:
   ~/Coding/CosyVoice/.venv/bin/python tts_batch.py video/script.json video/audio
-  ... --ref me.wav --ref-text "录音里说的原话"     # clone a voice
+Voice: <CosyVoice>/my_voice.wav + my_voice.txt (its exact transcript) if both exist,
+otherwise CosyVoice's sample voice.
+  ... --ref other.wav --ref-text "录音里说的原话"  # use another voice this time
+  ... --builtin-voice                            # force CosyVoice's sample voice
   ... --instruct "请用稍慢的语速说。"              # style instruction
 
 script.json: {"scenes": [{"id": "s1", "narration": "...", ...}, ...]}
@@ -21,8 +24,11 @@ sys.path.insert(0, os.path.join(ROOT, 'third_party', 'Matcha-TTS'))
 
 PREFIX = 'You are a helpful assistant.'
 MODEL_DIR = os.path.join(ROOT, 'pretrained_models', 'Fun-CosyVoice3-0.5B')
-DEFAULT_REF = os.path.join(ROOT, 'asset', 'zero_shot_prompt.wav')
-DEFAULT_REF_TEXT = '希望你以后能够做的比我还好呦。'
+BUILTIN_REF = os.path.join(ROOT, 'asset', 'zero_shot_prompt.wav')
+BUILTIN_REF_TEXT = '希望你以后能够做的比我还好呦。'
+# The user's own voice becomes the default when both files exist in the CosyVoice dir
+MY_REF = os.path.join(ROOT, 'my_voice.wav')
+MY_REF_TEXT_FILE = os.path.join(ROOT, 'my_voice.txt')
 
 
 def main():
@@ -33,12 +39,19 @@ def main():
     p.add_argument('--ref-text', help='exact transcript of the reference recording')
     p.add_argument('--instruct', help='style instruction, e.g. "请用稍慢的语速说。"')
     p.add_argument('--speed', type=float, default=1.0, help='speaking speed, 0.5-2.0')
+    p.add_argument('--builtin-voice', action='store_true', help="use CosyVoice's sample voice even if my_voice.wav exists")
     a = p.parse_args()
 
     with open(a.script, encoding='utf-8') as f:
         scenes = json.load(f)['scenes']
-    ref = os.path.abspath(a.ref) if a.ref else DEFAULT_REF
-    ref_text = a.ref_text if a.ref_text is not None else (DEFAULT_REF_TEXT if not a.ref else None)
+    if a.ref:
+        ref, ref_text = os.path.abspath(a.ref), a.ref_text
+    elif not a.builtin_voice and os.path.exists(MY_REF) and os.path.exists(MY_REF_TEXT_FILE):
+        with open(MY_REF_TEXT_FILE, encoding='utf-8') as f:
+            ref, ref_text = MY_REF, f.read().strip()
+    else:
+        ref, ref_text = BUILTIN_REF, BUILTIN_REF_TEXT
+    print(f'Voice: {ref}', flush=True)
     if not os.path.exists(ref):
         p.error(f'reference audio not found: {ref}')
     os.makedirs(a.out_dir, exist_ok=True)
