@@ -19,6 +19,9 @@
 - **podcast-transcribe** —— 苹果播客转写。给一个 Apple Podcasts 单集链接，自动经 iTunes Lookup API 解析出音频直链，下载后用本地 whisper.cpp（large-v3-turbo 模型，Metal 加速）转成逐字稿，按段落整理后存入 Obsidian vault，全程本地处理、音频不出本机。1 小时节目约 4 分钟转完。  
   *依赖：`brew install whisper-cpp jq ffmpeg` + [ggml-large-v3-turbo 模型](https://huggingface.co/ggerganov/whisper.cpp)（约 1.5GB，放 `~/.cache/whisper.cpp/`）。输出目录硬编码为作者的 Obsidian vault，使用前请修改 `SKILL.md` 中的路径*
 
+- **explainer** —— 四种方式讲清一个主题：ste（ASD-STE100 受控语言写作，含中文适配规则，默认 80% 强度）、diagram（Mermaid / 手写 SVG）、html（单文件离线交互网页）、video（3Blue1Brown 风格 Manim 动画 + 本地 CosyVoice 配音）。四种方法可任选一种或任意组合，产出落盘 Obsidian，每种产出交付前都截图/抽帧自检。  
+  *本 skill 基于 Karpathy 的推文编写：<https://x.com/karpathy/status/2105819303471976479>。video 依赖：[CosyVoice](https://github.com/FunAudioLLM/CosyVoice)（Fun-CosyVoice3-0.5B，默认路径 `~/Coding/CosyVoice`，可用 `COSYVOICE_DIR` 覆盖）、[uv](https://docs.astral.sh/uv/)（经 `uvx` 运行 Manim）、ffmpeg；diagram/html 自检依赖 Google Chrome。输出目录硬编码为作者的 Obsidian vault，使用前请修改 `SKILL.md` 中的路径*
+
 ## 安装
 
 一键安装全部 skill：
